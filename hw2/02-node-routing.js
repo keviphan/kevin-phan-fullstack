@@ -31,7 +31,7 @@ const server = http.createServer((req, res) => {
   // welcome route --> /welcome
   else if (req.url === '/welcome') {
     res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.write('<h1>Welcome<h1>');
+    res.write('<h1>Welcome</h1>');
     res.end();
   }
 
@@ -44,7 +44,7 @@ const server = http.createServer((req, res) => {
   // for the redirected route when redirect is done
   else if (req.url === '/redirected') {
     res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.write('<h1>You have been redrected to the /redirected<h1>');
+    res.write('<h1>You have been redrected to the /redirected</h1>');
     res.end();
   }
 
@@ -71,7 +71,7 @@ const server = http.createServer((req, res) => {
   // handle 404
   else {
     res.writeHead(404, { 'Content-Type': 'text/html' });
-    res.write('<h1>404: Page not found<h1>');
+    res.write('<h1>404: Page not found</h1>');
     res.end();
   }
 });

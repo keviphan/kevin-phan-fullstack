@@ -21,6 +21,7 @@ const routes = [
   'other',
 ];
 
+// main route --> /
 app.get('/', (req, res) => {
   res.status(200);
   res.set({ 'Content-Type': 'text/html' });
@@ -28,6 +29,53 @@ app.get('/', (req, res) => {
 });
 
 // Add your code here
+
+// welcome route --> /welcome
+app.get('/welcome', (req, res) => {
+  res.status(200);
+  res.set({ 'Content-Type': 'text/html' });
+  res.send('<h1>Welcome</h1>');
+});
+
+// redirect route --> /redirect
+app.get('/redirect', (req, res) => {
+  res.status(302);
+  res.redirect('/redirected');
+});
+
+// for the redirected route when redirect is done
+app.get('/redirected', (req, res) => {
+  res.status(200);
+  res.set({ 'Content-Type': 'text/html' });
+  res.send('<h1>You have been redrected to the /redirected</h1>');
+});
+
+// cache route --> /cache
+app.get('/cache', (req, res) => {
+  res.status(200);
+  res.set({
+    'Content-Type': 'text/plain',
+    'Cache-Control': 'max-age=86400',
+  });
+  res.send('This resource was cached');
+});
+
+// cookie route --> /cookie
+app.get('/cookie', (req, res) => {
+  res.status(200);
+  res.set({
+    'Content-Type': 'text/plain',
+    'Set-Cookie': 'hello=world',
+  });
+  res.send('cookies... yummm');
+});
+
+// handle 404
+app.use((req, res) => {
+  res.status(404);
+  res.set({ 'Content-Type': 'text/html' });
+  res.send('<h1>404: Page not found</h1>');
+});
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
