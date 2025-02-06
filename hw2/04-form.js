@@ -16,8 +16,7 @@ app.use(
 // main route --> /
 // (redirect to form)
 app.get('/', (req, res) => {
-  res.status(200);
-  res.redirect('/form');
+  res.redirect(302, '/form');
 });
 
 // form route --> /form
@@ -61,9 +60,10 @@ app.post('/submit', (req, res) => {
 
 // handle 404
 app.use((req, res) => {
-  res.status(404);
-  res.set({ 'Content-Type': 'text/html' });
-  res.send('<h1>404: Page not found</h1>');
+  res
+    .status(404)
+    .set({ 'Content-Type': 'text/html' })
+    .send('<h1>404: Page not found</h1>');
 });
 
 app.listen(port, () => {

@@ -12,15 +12,6 @@ const port = process.env.PORT || 5001;
 
 // For other routes, such as http://localhost:5001/other, this exercise should return a status code 404 with '404 - page not found' in html format
 
-const routes = [
-  'welcome',
-  'redirect',
-  'redirected',
-  'cache',
-  'cookie',
-  'other',
-];
-
 // main route --> /
 app.get('/', (req, res) => {
   res.status(200);
@@ -29,6 +20,9 @@ app.get('/', (req, res) => {
 });
 
 // Add your code here
+
+// suggestion from Eddie for 304
+app.disable('etag');
 
 // welcome route --> /welcome
 app.get('/welcome', (req, res) => {
@@ -39,25 +33,24 @@ app.get('/welcome', (req, res) => {
 
 // redirect route --> /redirect
 app.get('/redirect', (req, res) => {
-  res.status(302);
-  res.redirect('/redirected');
+  res.redirect(302, '/redirected');
 });
 
 // for the redirected route when redirect is done
 app.get('/redirected', (req, res) => {
   res.status(200);
   res.set({ 'Content-Type': 'text/html' });
-  res.send('<h1>You have been redrected to the /redirected</h1>');
+  res.send('<h1>You have been redirected to the /redirected</h1>');
 });
 
 // cache route --> /cache
 app.get('/cache', (req, res) => {
   res.status(200);
   res.set({
-    'Content-Type': 'text/plain',
+    'Content-Type': 'text/html',
     'Cache-Control': 'max-age=86400',
   });
-  res.send('This resource was cached');
+  res.send('<h1>This resource was cached</h1>');
 });
 
 // cookie route --> /cookie

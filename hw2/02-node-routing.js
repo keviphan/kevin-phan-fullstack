@@ -12,15 +12,6 @@ const port = process.env.PORT || 5001;
 // For other routes, such as http://localhost:5001/other, this exercise should return a status code 404 with '404 - page not found' in html format
 
 const server = http.createServer((req, res) => {
-  const routes = [
-    'welcome',
-    'redirect',
-    'redirected',
-    'cache',
-    'cookie',
-    'other',
-  ];
-
   // main route --> /
   if (req.url === '/') {
     res.writeHead(200, { 'Content-Type': 'text/html' });
@@ -44,17 +35,17 @@ const server = http.createServer((req, res) => {
   // for the redirected route when redirect is done
   else if (req.url === '/redirected') {
     res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.write('<h1>You have been redrected to the /redirected</h1>');
+    res.write('<h1>You have been redirected to the /redirected</h1>');
     res.end();
   }
 
   // cache route --> /cache
   else if (req.url === '/cache') {
     res.writeHead(200, {
-      'Content-Type': 'text/plain',
+      'Content-Type': 'text/html',
       'Cache-Control': 'max-age=86400',
     });
-    res.write('This resource was cached');
+    res.write('<h1>This resource was cached</h1>');
     res.end();
   }
 

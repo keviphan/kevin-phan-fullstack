@@ -2,7 +2,18 @@
 
 // Add your function here
 const calculateChange = (n) => {
-  if (n > 100) return 'the number is too large';
+  if (typeof n !== 'number') {
+    return 'Please enter a number';
+  }
+  if (n > 100) {
+    return 'The number is too large';
+  }
+  if (n < 0) {
+    return 'Please enter a positive number';
+  }
+  if (n === 0) {
+    return '0 pennies';
+  }
 
   const dollars = Math.floor(n);
   let change = n - dollars;
@@ -38,3 +49,10 @@ console.log(calculateChange(150.11));
 // $150.11 ==> Error: the number is too large
 
 // Add additional test cases here
+console.log(calculateChange('1.50'));
+// $'1.50' ==> Please enter a number
+
+console.log(calculateChange(-1.5));
+// -1.50 ==> Please enter a positive number
+
+console.log(calculateChange(0));
